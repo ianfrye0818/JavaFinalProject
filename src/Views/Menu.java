@@ -9,7 +9,7 @@ package Views;
  * @author Ian Frye
  */
 public interface Menu {
-    int displayMenu();
+    void displayMenu();
 
     void handleChoice(int choice);
 }

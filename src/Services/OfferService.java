@@ -4,9 +4,16 @@ import Models.Car;
 import Utils.MoneyFormatter;
 
 public class OfferService {
-  private final CustomerPurchaseService puchaseService;
+  private CustomerPurchaseService puchaseService;
 
   public OfferService(CustomerPurchaseService puchaseService) {
+    this.puchaseService = puchaseService;
+  }
+
+  public OfferService() {
+  }
+
+  public void setPuchaseService(CustomerPurchaseService puchaseService) {
     this.puchaseService = puchaseService;
   }
 

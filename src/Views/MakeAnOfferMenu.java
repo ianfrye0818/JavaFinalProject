@@ -16,15 +16,15 @@ public class MakeAnOfferMenu implements Menu {
     private final OfferService offerService;
     private final CustomerPurchaseService customerPurchaseService;
 
-    public MakeAnOfferMenu(MenuController menucContrller, OfferService offerService,
-            CustomerPurchaseService customerPurchaseService) {
+    public MakeAnOfferMenu(OfferService offerService,
+            CustomerPurchaseService customerPurchaseService, MenuController menucContrller) {
         this.offerService = offerService;
         this.menuController = menucContrller;
         this.customerPurchaseService = customerPurchaseService;
     }
 
     @Override
-    public int displayMenu() {
+    public void displayMenu() {
 
         System.out.println("\n****** MAKE AN OFFER MENU ******");
 
@@ -32,23 +32,27 @@ public class MakeAnOfferMenu implements Menu {
 
         if (car == null) {
             System.out.println("\nNo car selected. Returning to main menu.");
-            return 0;
+            menuController.setMenu(MenuChoices.CUSTOMER_MENU);
         }
 
-        System.out.println("\nYou have selected the following car: ");
+        System.out.println("\nYou have selected the following car:\n");
+
         System.out.println(car);
 
         System.out.println("\nHow are you liking the car? ");
-        System.out.println(" 1. Likes the car");
-        System.out.println(" 2. Somewhat likes the car");
-        System.out.println(" 3. Not easily swayed");
-        System.out.println(" 0. Return to main menu");
+        System.out.println(" 1. I like the car");
+        System.out.println(" 2. I somewhat like the car");
+        System.out.println(" 3. I'm not easily swayed");
+        System.out.println(" 0. Return to previous menu");
 
-        return ValidatorService.getValidNumber("Make a choice", 0, 3, Integer.class);
+        int choice = ValidatorService.getValidNumber("Make a choice", 0, 3, Integer.class);
+        handleChoice(choice);
     }
 
     @Override
     public void handleChoice(int choice) {
+        if (choice == 0)
+            this.menuController.setMenu(MenuChoices.CUSTOMER_MENU);
 
         // Set the discount based on the customer's choice
         customerPurchaseService.handleDiscount(choice);
@@ -57,7 +61,7 @@ public class MakeAnOfferMenu implements Menu {
         offerService.displayOfferSummary();
 
         // Hand off to the buy menu.
-        menuController.handleBuyCarMenu();
+        menuController.setMenu(MenuChoices.BUY_CAR_MENU);
     }
 
 }

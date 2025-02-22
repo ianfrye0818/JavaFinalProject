@@ -11,6 +11,11 @@ import Utils.EventBus;
  */
 
 public class CarLotService extends CarLot implements CarLotListener {
+
+  public CarLotService() {
+    EventBus.register(this);
+  }
+
   public void addNewCarToLot() {
     System.out.println("\n=== Adding New Car ===");
 

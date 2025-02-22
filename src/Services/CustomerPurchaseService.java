@@ -7,18 +7,32 @@ import Utils.EventBus;
 
 public class CustomerPurchaseService extends CustomerPurchase {
 
-  private final CustomerService customerService;
-  private final CarLotService carLotService;
+  private CustomerService customerService;
+  private CarLotService carLotService;
+
+  public CustomerPurchaseService() {
+  }
 
   public CustomerPurchaseService(CustomerService customerService, CarLotService carLotService) {
     this.customerService = customerService;
     this.carLotService = carLotService;
   }
 
+  public void setCustomerService(CustomerService customerService) {
+    this.customerService = customerService;
+  }
+
+  public void setCarLotService(CarLotService carLotService) {
+    this.carLotService = carLotService;
+  }
+
   public Car selectCarPurchase() {
     this.customerService.displayCustomerCars();
-    String vin = ValidatorService.getValidString("\nEnter the vin on the car you'd like to make an offer on? ");
+    String vin = ValidatorService
+        .getValidString("\nEnter the vin on the car you'd like to make an offer on? (Press e to exit) ");
 
+    if (vin.toLowerCase().equals("e"))
+      return null;
     // check to see if the customer vin in valid
     if (!this.customerService.validateWithVIN(vin)) {
       System.out.println("Invalid VIN");

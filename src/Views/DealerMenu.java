@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.MenuController;
 import Services.CarLotService;
 import Services.ValidatorService;
 
@@ -10,13 +11,15 @@ import Services.ValidatorService;
 
 public class DealerMenu implements Menu {
     private final CarLotService carService;
+    private final MenuController menuController;
 
-    public DealerMenu(CarLotService carService) {
+    public DealerMenu(CarLotService carService, MenuController menuController) {
         this.carService = carService;
+        this.menuController = menuController;
     }
 
     @Override
-    public int displayMenu() {
+    public void displayMenu() {
         System.out.println("\n****** DEALER MENU ******");
         System.out.println("1. Add a Car");
         System.out.println("2. Remove a Car");
@@ -25,7 +28,10 @@ public class DealerMenu implements Menu {
         System.out.println("5. Display lowest price");
         System.out.println("0. Previous Menu");
 
-        return ValidatorService.getValidNumber("Enter your choice: ", 0, 5, Integer.class);
+        int choice = ValidatorService.getValidNumber("Enter your choice: ", 0, 5, Integer.class);
+
+        handleChoice(choice);
+
     }
 
     @Override
@@ -36,9 +42,8 @@ public class DealerMenu implements Menu {
             case 3 -> carService.displayAllCars();
             case 4 -> carService.displayAverageMiles();
             case 5 -> carService.displayLowestPrice();
-            case 0 -> System.out.println("Returning to previous menu...");
+            case 0 -> menuController.setMenu(MenuChoices.MAIN_MENU);
             default -> System.out.println("Invalid choice. Please try again.");
         }
     }
 }
-

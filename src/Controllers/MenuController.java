@@ -9,6 +9,7 @@ import Views.CustomerMenu;
 import Views.DealerMenu;
 import Views.MainMenu;
 import Views.MakeAnOfferMenu;
+import Views.MenuChoices;
 
 /**
  *
@@ -24,60 +25,36 @@ public class MenuController {
     public MenuController(CarLotService carService, CustomerService customerService, OfferService offerService,
             CustomerPurchaseService customerPurchaseService) {
         this.mainMenu = new MainMenu(this);
-        this.makeAnOfferMenu = new MakeAnOfferMenu(this, offerService, customerPurchaseService);
-        this.dealerMenu = new DealerMenu(carService);
-
+        this.makeAnOfferMenu = new MakeAnOfferMenu(offerService, customerPurchaseService, this);
+        this.dealerMenu = new DealerMenu(carService, this);
         this.customerMenu = new CustomerMenu(carService, customerService, this);
-
-        this.buyCarMenu = new BuyCarMenu();
-        this.buyCarMenu.setCustomerPurchaseService(customerPurchaseService);
-        this.buyCarMenu.setMenuController(this);
+        this.buyCarMenu = new BuyCarMenu(customerPurchaseService, this);
     }
 
-    public void displayMainMenu() {
+    public void setMenu(MenuChoices menu) {
         while (true) {
-            int choice = mainMenu.displayMenu();
-            if (choice == 0)
-                return;
-            mainMenu.handleChoice(choice);
+            switch (menu) {
+                case MAIN_MENU:
+                    mainMenu.displayMenu();
+                    break;
+                case DEALER_MENU:
+                    dealerMenu.displayMenu();
+                    break;
+                case CUSTOMER_MENU:
+                    customerMenu.displayMenu();
+                    break;
+                case MAKE_AN_OFFER_MENU:
+                    makeAnOfferMenu.displayMenu();
+                    break;
+                case BUY_CAR_MENU:
+                    buyCarMenu.displayMenu();
+                    break;
+            }
         }
     }
 
-    public void handleDealerMenu() {
-        while (true) {
-            int choice = dealerMenu.displayMenu();
-            if (choice == 0)
-                return;
-            dealerMenu.handleChoice(choice);
-        }
-    }
-
-    public void handleCustomerMenu() {
-        while (true) {
-            int choice = customerMenu.displayMenu();
-            if (choice == 0)
-                return;
-            customerMenu.handleChoice(choice);
-        }
-    }
-
-    public void handleMakeAnOfferMenu() {
-        while (true) {
-            int choice = makeAnOfferMenu.displayMenu();
-            if (choice == 0)
-                return;
-            makeAnOfferMenu.handleChoice(choice);
-        }
-    }
-
-    public void handleBuyCarMenu() {
-        while (true) {
-            int choice = buyCarMenu.displayMenu();
-            if (choice == 0)
-                return;
-            buyCarMenu.handleChoice(choice);
-        }
-
+    public void start() {
+        setMenu(MenuChoices.MAIN_MENU);
     }
 
 }

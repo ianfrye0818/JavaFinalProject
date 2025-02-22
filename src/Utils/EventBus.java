@@ -7,7 +7,7 @@ import Models.Car;
 public class EventBus {
   private static final List<CarLotListener> listeners = new ArrayList<>();
 
-  public static void regeister(CarLotListener listener) {
+  public static void register(CarLotListener listener) {
     listeners.add(listener);
   }
 

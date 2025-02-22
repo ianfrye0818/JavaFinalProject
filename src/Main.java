@@ -46,7 +46,7 @@ import Services.OfferService;
  * [x] The user should be able to view what the lowest price is for all the cars
  * on the lot
  * [x] The use should be able to make an offer for a car
- * [] This should show the customer the list price a discount price and the
+ * [x] This should show the customer the list price a discount price and the
  * asking price
  * [x] It should ask the user how they feel about the user
  * [x] Likes the car
@@ -68,12 +68,11 @@ public class Main {
         // Initialize all of our objects for Dependency Injection.
         CarLotService carLotService = new CarLotService();
         CustomerService customerService = new CustomerService(carLotService);
-        CustomerPurchaseService customerPurchaseService = new CustomerPurchaseService(customerService, carLotService);
-        OfferService offerService = new OfferService(customerPurchaseService);
-
+        CustomerPurchaseService puchaseService = new CustomerPurchaseService(customerService, carLotService);
+        OfferService offerService = new OfferService(puchaseService);
         MenuController menuController = new MenuController(carLotService, customerService, offerService,
-                customerPurchaseService);
+                puchaseService);
 
-        menuController.displayMainMenu();
+        menuController.start();
     }
 }

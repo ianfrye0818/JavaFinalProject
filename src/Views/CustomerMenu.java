@@ -23,7 +23,7 @@ public class CustomerMenu implements Menu {
     }
 
     @Override
-    public int displayMenu() {
+    public void displayMenu() {
         System.out.println("\n****** CUSTOMER MENU ******");
         System.out.println("1. Add a car to your choices");
         System.out.println("2. Remove a car from your choices");
@@ -36,7 +36,10 @@ public class CustomerMenu implements Menu {
         System.out.println("9. View lowest price from your choices");
         System.out.println("0. Previous Menu");
 
-        return ValidatorService.getValidNumber("Enter your choice: ", 0, 9, Integer.class);
+        int choice = ValidatorService.getValidNumber("Enter your choice: ", 0, 9, Integer.class);
+
+        handleChoice(choice);
+
     }
 
     @Override
@@ -44,14 +47,14 @@ public class CustomerMenu implements Menu {
         switch (choice) {
             case 1 -> customerService.addNewCarToCustomerChoices();
             case 2 -> customerService.removeCarFromCustomer();
-            case 3 -> menuController.handleMakeAnOfferMenu();
+            case 3 -> menuController.setMenu(MenuChoices.MAKE_AN_OFFER_MENU);
             case 4 -> customerService.displayCustomerCars();
             case 5 -> carService.displayAllCars();
             case 6 -> carService.displayAverageMiles();
             case 7 -> customerService.displayAverageMiles();
             case 8 -> carService.displayLowestPrice();
             case 9 -> customerService.displayLowestPrice();
-            case 0 -> System.out.println("Returning to previous menu...");
+            case 0 -> menuController.setMenu(MenuChoices.MAIN_MENU);
             default -> System.out.println("Invalid choice. Please try again.");
         }
     }

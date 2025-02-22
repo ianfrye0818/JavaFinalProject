@@ -3,7 +3,6 @@ package Services;
 import Models.Car;
 import Models.Customer;
 import Utils.CarLotListener;
-import Utils.CustomerDiscount;
 import Utils.EventBus;
 
 /**
@@ -11,11 +10,19 @@ import Utils.EventBus;
  * @author Ian Frye
  */
 public class CustomerService extends Customer implements CarLotListener {
-  private final CarLotService carLotService;
+  private CarLotService carLotService;
+
+  public CustomerService() {
+    EventBus.register(this);
+  }
 
   public CustomerService(CarLotService carLotService) {
     this.carLotService = carLotService;
-    EventBus.regeister(this);
+    this();
+  }
+
+  public void setCarLotService(CarLotService carLotService) {
+    this.carLotService = carLotService;
   }
 
   public void removeCarFromCustomer() {
