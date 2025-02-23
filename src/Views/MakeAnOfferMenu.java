@@ -7,8 +7,10 @@ import Services.OfferService;
 import Services.ValidatorService;
 
 /**
- *
  * @author Ian Frye
+ *
+ *         This holds the view for the Make an Offer Menu
+ *         Implements the Menu class
  */
 public class MakeAnOfferMenu implements Menu {
 
@@ -17,9 +19,9 @@ public class MakeAnOfferMenu implements Menu {
     private final CustomerPurchaseService customerPurchaseService;
 
     public MakeAnOfferMenu(OfferService offerService,
-            CustomerPurchaseService customerPurchaseService, MenuController menucContrller) {
+            CustomerPurchaseService customerPurchaseService, MenuController menuController) {
         this.offerService = offerService;
-        this.menuController = menucContrller;
+        this.menuController = menuController;
         this.customerPurchaseService = customerPurchaseService;
     }
 
@@ -31,12 +33,10 @@ public class MakeAnOfferMenu implements Menu {
         Car car = customerPurchaseService.selectCarPurchase();
 
         if (car == null) {
-            System.out.println("\nNo car selected. Returning to main menu.");
             menuController.setMenu(MenuChoices.CUSTOMER_MENU);
         }
 
         System.out.println("\nYou have selected the following car:\n");
-
         System.out.println(car);
 
         System.out.println("\nHow are you liking the car? ");

@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Views;
 
 /**
  *
  * @author Ian Frye
+ *
+ * This interface makes sure that all the menus contain a displayMenu and handleChoice method.
  */
 public interface Menu {
     void displayMenu();

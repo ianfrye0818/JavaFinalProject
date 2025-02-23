@@ -5,10 +5,11 @@ import Services.CarLotService;
 import Services.ValidatorService;
 
 /**
- *
  * @author Ian Frye
+ *
+ * This holds the view for the Dealer Menu
+ * Implements the Menu class
  */
-
 public class DealerMenu implements Menu {
     private final CarLotService carService;
     private final MenuController menuController;

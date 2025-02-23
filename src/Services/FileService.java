@@ -10,10 +10,16 @@ import java.util.List;
 
 /**
  *
- * @author ianfr
+ * @author Ian Frye
+ * This class is responsible for saving and reteeiving the saved states from the csv files.
  */
 public class FileService {
 
+  /**
+   *
+   * @param filename the name of the file
+   * @param cars the list of cars to save
+   */
   public static void saveCarsToFile(String filename, List<Car> cars) {
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
       for (Car car : cars) {
@@ -25,6 +31,11 @@ public class FileService {
     }
   }
 
+  /**
+   *
+   * @param filename the name of the file to retrieve
+   * @param cars The list of saved cars
+   */
   public static void loadCarsFromFile(String filename, List<Car> cars) {
     try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
       String line;

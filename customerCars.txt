@@ -1,2 +1,1 @@
-9101,Chevrolet,Malibu,2021,12000,22000.00
-1357,Volkswagen,Jetta,2022,10000,21000.00
+2468,Subaru,Outback,2019,40000,19000.00

@@ -14,8 +14,13 @@ import Views.MenuChoices;
 /**
  *
  * @author Ian Frye
+ *
+ * This class is responsible for switching out he views based on what menu the
+ * user is on.
  */
 public class MenuController {
+
+    //Create objects for all the menus
     private final MainMenu mainMenu;
     private final DealerMenu dealerMenu;
     private final CustomerMenu customerMenu;
@@ -31,28 +36,27 @@ public class MenuController {
         this.buyCarMenu = new BuyCarMenu(customerPurchaseService, this);
     }
 
+    /**
+     * The main loop of the program, This keeps the program running unless the
+     * user manually exits.
+     *
+     * @param menu The menu that should be displayed
+     */
     public void setMenu(MenuChoices menu) {
         while (true) {
             switch (menu) {
-                case MAIN_MENU:
-                    mainMenu.displayMenu();
-                    break;
-                case DEALER_MENU:
-                    dealerMenu.displayMenu();
-                    break;
-                case CUSTOMER_MENU:
-                    customerMenu.displayMenu();
-                    break;
-                case MAKE_AN_OFFER_MENU:
-                    makeAnOfferMenu.displayMenu();
-                    break;
-                case BUY_CAR_MENU:
-                    buyCarMenu.displayMenu();
-                    break;
+                case MAIN_MENU -> mainMenu.displayMenu();
+                case DEALER_MENU -> dealerMenu.displayMenu();
+                case CUSTOMER_MENU -> customerMenu.displayMenu();
+                case MAKE_AN_OFFER_MENU -> makeAnOfferMenu.displayMenu();
+                case BUY_CAR_MENU -> buyCarMenu.displayMenu();
             }
         }
     }
 
+    /**
+     * Display the Main Menu at start of application.
+     */
     public void start() {
         setMenu(MenuChoices.MAIN_MENU);
     }

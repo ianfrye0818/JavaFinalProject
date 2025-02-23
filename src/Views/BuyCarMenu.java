@@ -4,24 +4,20 @@ import Controllers.MenuController;
 import Services.CustomerPurchaseService;
 import Services.ValidatorService;
 
+/**
+ * @author Ian Frye
+ *
+ * This holds the view for the Buy Car Menu
+ * Implements the Menu class
+ */
+
 public class BuyCarMenu implements Menu {
 
-  private CustomerPurchaseService customerPurchaseService;
-  private MenuController menuController;
-
-  public BuyCarMenu() {
-  }
+  private final CustomerPurchaseService customerPurchaseService;
+  private final MenuController menuController;
 
   public BuyCarMenu(CustomerPurchaseService customerPurchaseService, MenuController menuController) {
     this.customerPurchaseService = customerPurchaseService;
-    this.menuController = menuController;
-  }
-
-  public void setCustomerPurchaseService(CustomerPurchaseService customerPurchaseService) {
-    this.customerPurchaseService = customerPurchaseService;
-  }
-
-  public void setMenuController(MenuController menuController) {
     this.menuController = menuController;
   }
 

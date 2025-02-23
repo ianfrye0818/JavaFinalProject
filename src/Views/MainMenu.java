@@ -4,8 +4,10 @@ import Controllers.MenuController;
 import Services.ValidatorService;
 
 /**
- *
  * @author Ian Frye
+ *
+ * This holds the view for the Main Menu
+ * Implements the Menu class
  */
 public class MainMenu implements Menu {
 

@@ -4,7 +4,11 @@ import java.util.Scanner;
 
 /**
  *
- * @author ianfr
+ * @author Ian Frye
+ * This class is a generic class that allows me to take in a number with a set uppoer and lower bound and a prompt.
+ * It will return a number within those bounds of the correct type.
+ *
+ * It also includes a get valid string method just to return a non-empty string.
  */
 
 
@@ -12,10 +16,20 @@ public class ValidatorService {
 
     private static final Scanner scanner = new Scanner(System.in);
 
+    /**
+     *
+     * @param prompt     What to ask the user
+     * @param lowerBound The lowest valid number
+     * @param upperBound The highest valid number
+     * @param type       The type of number we are comparing
+     * @param <T>        They type of number we are validating
+     * @return           A validated number of the correct type
+     * @param <T>        The expected return type.
+     */
     public static <T extends Number & Comparable<T>> T getValidNumber(
             String prompt, T lowerBound, T upperBound, Class<T> type, String errorMessage) {
 
-        T value = null;
+        T value;
 
         while (true) {
             try {
@@ -77,6 +91,12 @@ public class ValidatorService {
         return getValidNumber(prompt, lowerBound, upperBound, type, "Invalid input. Please try again.");
     }
 
+
+    /**
+     *
+     * @param prompt What to ask the user
+     * @return A non-empty string.
+     */
     public static String getValidString(String prompt) {
         String input;
 
